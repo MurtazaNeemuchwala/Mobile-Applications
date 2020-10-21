@@ -1,21 +1,29 @@
 package com.example.calculatorproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 public class MainActivity extends AppCompatActivity {
 
-    Button one, two, three, four, five, six, seven, eight, nine, zero, decimal, enter, multiply, divide, subtract, add;
+    Button one, two, three, four, five, six, seven, eight, nine, zero, clear, enter, mult, div, sub, add;
     TextView display;
+    String EQ;
+    ArrayList<String> sEQ = new ArrayList<String>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //StringTokenizer st1 = new StringTokenizer(a, " ");
         one = findViewById(R.id.id_one);
         two = findViewById(R.id.id_two);
         three = findViewById(R.id.id_three);
@@ -26,123 +34,151 @@ public class MainActivity extends AppCompatActivity {
         eight = findViewById(R.id.id_eight);
         nine = findViewById(R.id.id_nine);
         zero = findViewById(R.id.id_zero);
-        decimal = findViewById(R.id.id_decimal);
+        clear = findViewById(R.id.id_clear);
         enter = findViewById(R.id.id_enter);
-        multiply = findViewById(R.id.id_multiplication);
-        divide = findViewById(R.id.id_division);
-        subtract = findViewById(R.id.id_subtraction);
+        mult = findViewById(R.id.id_multiplication);
+        div = findViewById(R.id.id_division);
+        sub = findViewById(R.id.id_subtraction);
         add = findViewById(R.id.id_Addition);
         display = findViewById(R.id.display);
+        EQ = "";
+        display.setText(EQ);
 
         one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ += one.getText();
+                display.setText(EQ);
             }
         });
 
         two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ += two.getText();
+                display.setText(EQ);
             }
         });
 
         three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ += three.getText();
+                display.setText(EQ);
             }
         });
 
         four.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ += four.getText();
+                display.setText(EQ);
             }
         });
 
         five.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ += five.getText();
+                display.setText(EQ);
             }
         });
 
         six.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ += six.getText();
+                display.setText(EQ);
             }
         });
 
         seven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ += seven.getText();
+                display.setText(EQ);
             }
         });
 
         eight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ += eight.getText();
+                display.setText(EQ);
             }
         });
 
         nine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ += nine.getText();
+                display.setText(EQ);
             }
         });
 
         zero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ += zero.getText();
+                display.setText(EQ);
             }
         });
 
-        decimal.setOnClickListener(new View.OnClickListener() {
+        clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ = "";
+                display.setText(EQ);
             }
         });
 
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Tokenizer Constructor
+                StringTokenizer SplittedEQ = new StringTokenizer(EQ, "/*-+", true);
+
+                //runs through string to search and split according to constructor's parameters
+                while (SplittedEQ.hasMoreTokens()) {
+                    sEQ.add(SplittedEQ.nextToken());
+                }
+
+                //takes splitted text and converts to string  
+                String string = String.valueOf(sEQ);
+                display.setText(string);
 
             }
         });
 
-        multiply.setOnClickListener(new View.OnClickListener() {
+        mult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ += mult.getText();
+                display.setText(EQ);
             }
         });
 
-        divide.setOnClickListener(new View.OnClickListener() {
+        div.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ += div.getText();
+                display.setText(EQ);
             }
         });
 
-        subtract.setOnClickListener(new View.OnClickListener() {
+        sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ += sub.getText();
+                display.setText(EQ);
             }
         });
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EQ += add.getText();
+                display.setText(EQ);
             }
         });
     }

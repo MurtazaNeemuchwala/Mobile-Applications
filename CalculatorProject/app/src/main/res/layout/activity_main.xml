@@ -20,25 +20,25 @@
                 android:id="@+id/id_seven"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="7️⃣" />
+                android:text="7" />
 
             <Button
                 android:id="@+id/id_four"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="4️⃣" />
+                android:text="4" />
 
             <Button
                 android:id="@+id/id_one"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1️⃣" />
+                android:text="1" />
 
             <Button
                 android:id="@+id/id_zero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0️⃣" />
+                android:text="0" />
 
         </LinearLayout>
 
@@ -51,25 +51,25 @@
                 android:id="@+id/id_eight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="8️⃣" />
+                android:text="8" />
 
             <Button
                 android:id="@+id/id_five"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="5️⃣" />
+                android:text="5" />
 
             <Button
                 android:id="@+id/id_two"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2️⃣" />
+                android:text="2" />
 
             <Button
-                android:id="@+id/id_decimal"
+                android:id="@+id/id_clear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="." />
+                android:text="C" />
         </LinearLayout>
 
         <LinearLayout
@@ -81,19 +81,19 @@
                 android:id="@+id/id_nine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="9️⃣" />
+                android:text="9" />
 
             <Button
                 android:id="@+id/id_six"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="6️⃣" />
+                android:text="6" />
 
             <Button
                 android:id="@+id/id_three"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="3️⃣" />
+                android:text="3" />
 
             <Button
                 android:id="@+id/id_enter"
@@ -118,13 +118,13 @@
                 android:id="@+id/id_division"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="÷" />
+                android:text="/" />
 
             <Button
                 android:id="@+id/id_multiplication"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="×" />
+                android:text="*" />
 
             <Button
                 android:id="@+id/id_Addition"
@@ -147,7 +147,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:text="TextView"
-        android:textSize="64sp" />
+        android:text="0"
+        android:textSize="80sp" />
 
 </RelativeLayout>
