@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         enter.setOnClickListener(new View.OnClickListener() {
-            @SuppressWarnings("DuplicateCondition")
+
             @Override
             public void onClick(View v) {
                 //Tokenizer Constructor
@@ -147,43 +147,57 @@ public class MainActivity extends AppCompatActivity {
 
                 double num1 = 0;
                 double num2 = 0;
+
+                //value of num1 and num2
                 double product = 0;
+                //checks to see if product has been used before so code knows not to use num1 (DOES NOT FOLLOW ORDER OF OPERATIONS)
                 boolean changed = false;
 
                 //goes through arraylist containing the  equation
                 for (int i = 0; i < sEQ.size(); i++) {
 
-                    if ((sEQ.get(i) != "*") || (sEQ.get(i) != "/") || (sEQ.get(i) != "-") || ((sEQ.get(i) != "+") && (i == 0))) {
+                    //chck to see if this is the first "number"
+                    if ((sEQ.get(i).equals("*") == false) || (sEQ.get(i).equals("+") == false) || (sEQ.get(i).equals("-") == false) || (sEQ.get(i).equals("/") == false) && (i == 0)) {
                         num1 = Double.parseDouble(sEQ.get(i));
-                    } else if ((sEQ.get(i) != "*") || (sEQ.get(i) != "/") || (sEQ.get(i) != "-") || ((sEQ.get(i) != "+") && (i < 1))) {
+                        //chck to see if this is not the first "number"
+                    } else if ((sEQ.get(i).equals("*") == false) || (sEQ.get(i).equals("+") == false) || (sEQ.get(i).equals("-") == false) || (sEQ.get(i).equals("/") == false) && (i < 1)) {
                         num2 = Double.parseDouble(sEQ.get(i));
-                    } else if ((sEQ.get(i) == "+") && (!changed)) {
-                        product = num1 + num2;
-                        changed = true;
-                    } else if ((sEQ.get(i) == "-") && (!changed)) {
-                        product = num1 - num2;
-                        changed = true;
-                    } else if ((sEQ.get(i) == "*") && (!changed)) {
+                        //check to see if it is a math operator but "double product has NOT changed"
+                    } else if ((sEQ.get(i).equals("*")) && (!changed)) {
                         product = num1 * num2;
                         changed = true;
-                    } else if ((sEQ.get(i) == "/") && (!changed)) {
+                        //check to see if it is a math operator but "double product has NOT changed"
+                    } else if ((sEQ.get(i).equals("+")) && (!changed)) {
+                        product = num1 + num2;
+                        changed = true;
+                        //check to see if it is a math operator but "double product has NOT changed"
+                    } else if ((sEQ.get(i).equals("-")) && (!changed)) {
+                        product = num1 - num2;
+                        changed = true;
+                        //check to see if it is a math operator but "double product has NOT changed"
+                    } else if ((sEQ.get(i).equals("/")) && (!changed)) {
                         //NEED TO DO THE IF DIVIDE BY 0 PART
                         product = num1 / num2;
                         changed = true;
-                    } else if ((sEQ.get(i) == "+") && (changed)) {
+                        //check to see if it is a math operator but "double product has changed"
+                    } else if ((sEQ.get(i).equals("+")) && (changed)) {
                         product += num2;
-                    } else if ((sEQ.get(i) == "-") && (changed)) {
+                        //check to see if it is a math operator but "double product has changed"
+                    } else if ((sEQ.get(i).equals("-")) && (changed)) {
                         product -= num2;
-                    } else if ((sEQ.get(i) == "*") && (changed)) {
+                        //check to see if it is a math operator but "double product has changed"
+                    } else if ((sEQ.get(i).equals("*")) && (changed)) {
                         product *= num2;
-                    } else if ((sEQ.get(i) == "+") && (changed)) {
+                        //check to see if it is a math operator but "double product has changed"
+                    } else if ((sEQ.get(i).equals("/")) && (changed)) {
                         product /= num2;
                     }
+                    /*
+                    REMOVE COMMENT TO MAKE THE BUTTON CHANGE THE DISPLAY
+                    String output = Double.toString(product);
+                    display.setText(output);
+                     */
                 }
-
-                //takes splitted text and converts to string
-                String string = String.valueOf(sEQ);
-                display.setText(string);
 
             }
         });
