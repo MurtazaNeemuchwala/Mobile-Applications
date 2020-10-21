@@ -10,19 +10,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+@SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity {
 
     Button one, two, three, four, five, six, seven, eight, nine, zero, clear, enter, mult, div, sub, add;
     TextView display;
     String EQ;
-    ArrayList<String> sEQ = new ArrayList<String>();
-
+    ArrayList<String> sEQ = new ArrayList<>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //StringTokenizer st1 = new StringTokenizer(a, " ");
         one = findViewById(R.id.id_one);
         two = findViewById(R.id.id_two);
@@ -133,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         enter.setOnClickListener(new View.OnClickListener() {
+            @SuppressWarnings("DuplicateCondition")
             @Override
             public void onClick(View v) {
                 //Tokenizer Constructor
@@ -143,7 +145,43 @@ public class MainActivity extends AppCompatActivity {
                     sEQ.add(SplittedEQ.nextToken());
                 }
 
-                //takes splitted text and converts to string  
+                double num1 = 0;
+                double num2 = 0;
+                double product = 0;
+                boolean changed = false;
+
+                //goes through arraylist containing the  equation
+                for (int i = 0; i < sEQ.size(); i++) {
+
+                    if ((sEQ.get(i) != "*") || (sEQ.get(i) != "/") || (sEQ.get(i) != "-") || ((sEQ.get(i) != "+") && (i == 0))) {
+                        num1 = Double.parseDouble(sEQ.get(i));
+                    } else if ((sEQ.get(i) != "*") || (sEQ.get(i) != "/") || (sEQ.get(i) != "-") || ((sEQ.get(i) != "+") && (i < 1))) {
+                        num2 = Double.parseDouble(sEQ.get(i));
+                    } else if ((sEQ.get(i) == "+") && (!changed)) {
+                        product = num1 + num2;
+                        changed = true;
+                    } else if ((sEQ.get(i) == "-") && (!changed)) {
+                        product = num1 - num2;
+                        changed = true;
+                    } else if ((sEQ.get(i) == "*") && (!changed)) {
+                        product = num1 * num2;
+                        changed = true;
+                    } else if ((sEQ.get(i) == "/") && (!changed)) {
+                        //NEED TO DO THE IF DIVIDE BY 0 PART
+                        product = num1 / num2;
+                        changed = true;
+                    } else if ((sEQ.get(i) == "+") && (changed)) {
+                        product += num2;
+                    } else if ((sEQ.get(i) == "-") && (changed)) {
+                        product -= num2;
+                    } else if ((sEQ.get(i) == "*") && (changed)) {
+                        product *= num2;
+                    } else if ((sEQ.get(i) == "+") && (changed)) {
+                        product /= num2;
+                    }
+                }
+
+                //takes splitted text and converts to string
                 String string = String.valueOf(sEQ);
                 display.setText(string);
 
