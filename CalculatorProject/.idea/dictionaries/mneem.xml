@@ -2,7 +2,11 @@
   <dictionary name="mneem">
     <words>
       <w>arraylist</w>
+      <w>coutput</w>
       <w>mult</w>
+      <w>splitted</w>
+      <w>toutput</w>
+      <w>tproduct</w>
     </words>
   </dictionary>
 </component>

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-@SuppressWarnings("ALL")
+
 public class MainActivity extends AppCompatActivity {
 
     Button one, two, three, four, five, six, seven, eight, nine, zero, clear, enter, mult, div, sub, add;
@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EQ = "";
                 display.setText(EQ);
+                sEQ.clear();
             }
         });
 
@@ -137,67 +138,53 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                //Tokenizer Constructor
-                StringTokenizer SplittedEQ = new StringTokenizer(EQ, "/*-+", true);
-
-                //runs through string to search and split according to constructor's parameters
-                while (SplittedEQ.hasMoreTokens()) {
-                    sEQ.add(SplittedEQ.nextToken());
-                }
-
-                double num1 = 0;
-                double num2 = 0;
-
-                //value of num1 and num2
                 double product = 0;
-                //checks to see if product has been used before so code knows not to use num1 (DOES NOT FOLLOW ORDER OF OPERATIONS)
-                boolean changed = false;
+                boolean error;
+                try {
+                    try {
+                        //Tokenizer Constructor
+                        StringTokenizer SplittedEQ = new StringTokenizer(EQ, "/*-+", true);
 
-                //goes through arraylist containing the  equation
-                for (int i = 0; i < sEQ.size(); i++) {
+                        //runs through string to search and split according to constructor's parameters
+                        while (SplittedEQ.hasMoreTokens()) {
+                            sEQ.add(SplittedEQ.nextToken());
+                        }
+                        /* value of num1 and num2 */
+                        product = 0;
+                        error = false;
+                        /* goes through arraylist containing the  equation */
 
-                    //chck to see if this is the first "number"
-                    if ((sEQ.get(i).equals("*") == false) || (sEQ.get(i).equals("+") == false) || (sEQ.get(i).equals("-") == false) || (sEQ.get(i).equals("/") == false) && (i == 0)) {
-                        num1 = Double.parseDouble(sEQ.get(i));
-                        //chck to see if this is not the first "number"
-                    } else if ((sEQ.get(i).equals("*") == false) || (sEQ.get(i).equals("+") == false) || (sEQ.get(i).equals("-") == false) || (sEQ.get(i).equals("/") == false) && (i < 1)) {
-                        num2 = Double.parseDouble(sEQ.get(i));
-                        //check to see if it is a math operator but "double product has NOT changed"
-                    } else if ((sEQ.get(i).equals("*")) && (!changed)) {
-                        product = num1 * num2;
-                        changed = true;
-                        //check to see if it is a math operator but "double product has NOT changed"
-                    } else if ((sEQ.get(i).equals("+")) && (!changed)) {
-                        product = num1 + num2;
-                        changed = true;
-                        //check to see if it is a math operator but "double product has NOT changed"
-                    } else if ((sEQ.get(i).equals("-")) && (!changed)) {
-                        product = num1 - num2;
-                        changed = true;
-                        //check to see if it is a math operator but "double product has NOT changed"
-                    } else if ((sEQ.get(i).equals("/")) && (!changed)) {
-                        //NEED TO DO THE IF DIVIDE BY 0 PART
-                        product = num1 / num2;
-                        changed = true;
-                        //check to see if it is a math operator but "double product has changed"
-                    } else if ((sEQ.get(i).equals("+")) && (changed)) {
-                        product += num2;
-                        //check to see if it is a math operator but "double product has changed"
-                    } else if ((sEQ.get(i).equals("-")) && (changed)) {
-                        product -= num2;
-                        //check to see if it is a math operator but "double product has changed"
-                    } else if ((sEQ.get(i).equals("*")) && (changed)) {
-                        product *= num2;
-                        //check to see if it is a math operator but "double product has changed"
-                    } else if ((sEQ.get(i).equals("/")) && (changed)) {
-                        product /= num2;
+                        for (int i = 0; i < sEQ.size(); i++) {
+
+                            if (i == 0) {
+                                product += Double.parseDouble(sEQ.get(i));
+                            } else if (sEQ.get(i).equals("-")) {
+                                product -= Double.parseDouble(sEQ.get(i + 1));
+                            } else if (sEQ.get(i).equals("*")) {
+                                product *= Double.parseDouble(sEQ.get(i + 1));
+                            } else if (sEQ.get(i).equals("+")) {
+                                product += Double.parseDouble(sEQ.get(i + 1));
+                            } else if (sEQ.get(i).equals("/")) {
+                                product /= Double.parseDouble(sEQ.get(i + 1));
+                            }
+                        }
+                    } catch (IndexOutOfBoundsException e) {
+                        error = true;
                     }
-                    /*
-                    REMOVE COMMENT TO MAKE THE BUTTON CHANGE THE DISPLAY
-                    String output = Double.toString(product);
-                    display.setText(output);
-                     */
+                } catch (NumberFormatException e) {
+                    error = true;
                 }
+                if (product % 1 != 0) { //Decimals needed
+                    String DECoutput = String.valueOf(product);
+                    display.setText(DECoutput);
+                } else if (product % 1 == 0) {//Decimals not needed
+                    int INTproduct = (int) product;
+                    String INToutput = String.valueOf(INTproduct);
+                    display.setText(INToutput);
+                } else if (error == true){
+                    display.setText("ERROR");
+                }
+
 
             }
         });
