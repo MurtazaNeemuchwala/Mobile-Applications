@@ -174,15 +174,17 @@ public class MainActivity extends AppCompatActivity {
                 } catch (NumberFormatException e) {
                     error = true;
                 }
-                if (product % 1 != 0) { //Decimals needed
+
+                if ( error == true){ //uses try catch block to find error and display error 
+                    display.setText("ERROR");
+                }
+                else if (product % 1 != 0) { //Decimals needed
                     String DECoutput = String.valueOf(product);
                     display.setText(DECoutput);
                 } else if (product % 1 == 0) {//Decimals not needed
                     int INTproduct = (int) product;
                     String INToutput = String.valueOf(INTproduct);
                     display.setText(INToutput);
-                } else if (error == true){
-                    display.setText("ERROR");
                 }
 
 
