@@ -30,14 +30,28 @@ public class MainActivity extends AppCompatActivity {
         a.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                if(a.isChecked() && b.isChecked() && c.isChecked())
+                    textView.setTextColor(Color.GREEN);
+                else if(a.isChecked() && c.isChecked() && !b.isChecked())
+                    textView.setTextColor(Color.BLUE);
+                else if(!a.isChecked() && !b.isChecked() && c.isChecked())
+                    textView.setTextColor(Color.RED);
+                else
+                    textView.setTextColor(Color.BLACK);
             }
         });
 
         b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                if(a.isChecked() && b.isChecked() && c.isChecked())
+                    textView.setTextColor(Color.GREEN);
+                else if(a.isChecked() && c.isChecked() && !b.isChecked())
+                    textView.setTextColor(Color.BLUE);
+                else if(!a.isChecked() && !b.isChecked() && c.isChecked())
+                    textView.setTextColor(Color.RED);
+                else
+                    textView.setTextColor(Color.BLACK);
             }
         });
 
@@ -46,10 +60,12 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(a.isChecked() && b.isChecked() && c.isChecked())
                     textView.setTextColor(Color.GREEN);
-                if(a.isChecked() && c.isChecked() && !b.isChecked())
+                else if(a.isChecked() && c.isChecked() && !b.isChecked())
                     textView.setTextColor(Color.BLUE);
-                if(!a.isChecked() && !b.isChecked() && c.isChecked())
+                else if(!a.isChecked() && !b.isChecked() && c.isChecked())
                     textView.setTextColor(Color.RED);
+                else
+                    textView.setTextColor(Color.BLACK);
 
             }
         });
