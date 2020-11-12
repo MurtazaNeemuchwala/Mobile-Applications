@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@color/black"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <RadioGroup
+        android:id="@+id/radioGrp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioButton
+            android:id="@+id/radioButtonJim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jim" />
+
+        <RadioButton
+            android:id="@+id/radioButtonDwight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dwight" />
+
+        <RadioButton
+            android:id="@+id/radioButtonMike"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mike" />
+    </RadioGroup>
+</LinearLayout>
