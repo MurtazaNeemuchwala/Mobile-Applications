@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView textView;
     ImageView imageView;
-    RadioGroup radioGroup    ;
+    RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
