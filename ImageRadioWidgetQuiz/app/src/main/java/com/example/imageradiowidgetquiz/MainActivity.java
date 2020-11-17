@@ -46,32 +46,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(radioGroup.getCheckedRadioButtonId() != R.id.RadioOne || radioGroup.getCheckedRadioButtonId() != R.id.RadioTwo ){
+                if (usrInput.getText().equals("Nothing Selected")) {
                     Toast myMessage = Toast.makeText(MainActivity.this, "Nothing Selected", Toast.LENGTH_SHORT);
                     myMessage.show();
-                }
-
-                int a = (int) (Math.random() * (2 ) + 1);
-
-                if (a == 1) {
-                    compChoice.setImageResource(R.drawable.one);
-                } else if (a == 2) {
-                    compChoice.setImageResource(R.drawable.two);
-                }
-
-
-                if (radioGroup.getCheckedRadioButtonId() == R.id.RadioOne && a == 1) {
-                    ScrUsr++;
-                    Score.setText("Score: " + ScrUsr + " - " + ScrComp);
-                    Toast myMessage = Toast.makeText(MainActivity.this, "You won", Toast.LENGTH_SHORT);
-                    myMessage.show();
                 } else {
-                    ScrComp++;
-                    Score.setText("Score: " + ScrUsr + " - " + ScrComp);
-                    Toast myMessage = Toast.makeText(MainActivity.this, "You Lost", Toast.LENGTH_SHORT);
-                    myMessage.show();
-                }
+                    int a = (int) (Math.random() * (2) + 1);
 
+                    if (a == 1) {
+                        compChoice.setImageResource(R.drawable.one);
+                    } else if (a == 2) {
+                        compChoice.setImageResource(R.drawable.two);
+                    }
+
+
+                    if (radioGroup.getCheckedRadioButtonId() == R.id.RadioOne && a == 1) {
+                        ScrUsr++;
+                        Score.setText("Score: " + ScrUsr + " - " + ScrComp);
+                        Toast myMessage = Toast.makeText(MainActivity.this, "You won", Toast.LENGTH_SHORT);
+                        myMessage.show();
+                    } else {
+                        ScrComp++;
+                        Score.setText("Score: " + ScrUsr + " - " + ScrComp);
+                        Toast myMessage = Toast.makeText(MainActivity.this, "You Lost", Toast.LENGTH_SHORT);
+                        myMessage.show();
+                    }
+                }
 
             }
         });
