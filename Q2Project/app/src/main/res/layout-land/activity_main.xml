@@ -8,8 +8,8 @@
 
     <ListView
         android:id="@+id/id_listview_main"
-        android:layout_width="409dp"
-        android:layout_height="630dp"
+        android:layout_width="730dp"
+        android:layout_height="410dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
