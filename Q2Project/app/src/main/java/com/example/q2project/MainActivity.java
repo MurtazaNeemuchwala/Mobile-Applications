@@ -33,18 +33,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.id_listview_main);
-        arrayList = new ArrayList<>();
 
-        CustomAdapter adapter = new CustomAdapter(this, R.layout.adapter_listview, arrayList);
-        listView.setAdapter(adapter);
+        if(savedInstanceState == null) {
+            arrayList = new ArrayList<>();
 
-        arrayList.add(new Heros("Batman", "DC Universe. His abilities include above human intelligence, access to advanced technologies, adept hand to hand combat, and close to peak human capabilities", (R.drawable.batman)));
-        arrayList.add(new Heros("Captain America", "Marvel Universe. His abilities include superhuman capabilities, mastery in all forms of martial arts, and dexterity with his vibranium crafted shield.", (R.drawable.captain_america)));
-        arrayList.add(new Heros("Spiderman", "Marvel Universe. Spiderman uses his genius level mind and superhuman strength and stamina to fight off crime in the city of New York.", (R.drawable.spiderman)));
-        arrayList.add(new Heros("Ironman", "Marvel Universe. His abilities include above human intelligence, access to advanced technologies, and phenomenal engineering skills.", (R.drawable.ironman)));
-        arrayList.add(new Heros("Hulk", "Marvel Universe. His abilities include, above human intelligence, superior knowledge in the field of chemistry and physics, and can become an enraged super human when angered. ", (R.drawable.hulk)));
-        arrayList.add(new Heros("Flash", "DC Universe. His abilities include, above human intelligence, superhuman speed which allows him to asses and resolve critical situation in the matter of a split second.", (R.drawable.flash)));
+            arrayList.add(new Heros("Batman", "DC Universe. His abilities include above human intelligence, access to advanced technologies, adept hand to hand combat, and close to peak human capabilities", (R.drawable.batman)));
+            arrayList.add(new Heros("Captain America", "Marvel Universe. His abilities include superhuman capabilities, mastery in all forms of martial arts, and dexterity with his vibranium crafted shield.", (R.drawable.captain_america)));
+            arrayList.add(new Heros("Spiderman", "Marvel Universe. Spiderman uses his genius level mind and superhuman strength and stamina to fight off crime in the city of New York.", (R.drawable.spiderman)));
+            arrayList.add(new Heros("Ironman", "Marvel Universe. His abilities include above human intelligence, access to advanced technologies, and phenomenal engineering skills.", (R.drawable.ironman)));
+            arrayList.add(new Heros("Hulk", "Marvel Universe. His abilities include, above human intelligence, superior knowledge in the field of chemistry and physics, and can become an enraged super human when angered. ", (R.drawable.hulk)));
+            arrayList.add(new Heros("Flash", "DC Universe. His abilities include, above human intelligence, superhuman speed which allows him to asses and resolve critical situation in the matter of a split second.", (R.drawable.flash)));
 
+            CustomAdapter adapter = new CustomAdapter(this, R.layout.adapter_listview, arrayList);
+            listView.setAdapter(adapter);
+        }else{
+            //arrayList = savedInstanceState.getParcelableArrayList(SAVESTATE_COUNT);
+        }
     }
 
     public class CustomAdapter extends ArrayAdapter<Heros> {
