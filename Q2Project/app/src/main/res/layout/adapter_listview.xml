@@ -6,49 +6,49 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="1">
 
         <ImageView
             android:id="@+id/id_adapter_imageView"
-            android:layout_width="87dp"
-            android:layout_height="74dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintHorizontal_bias="0.009"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.048" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/id_adapter_TextView"
-            android:layout_width="188dp"
-            android:layout_height="70dp"
+            android:layout_width="257dp"
+            android:layout_height="98dp"
             android:layout_weight="1"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.461"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.054" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/id_adapter_button"
-            android:layout_width="102dp"
-            android:layout_height="54dp"
+            android:layout_width="97dp"
+            android:layout_height="52dp"
             android:layout_weight="1"
             android:text="REMOVE"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.941"
+            app:layout_constraintHorizontal_bias="0.949"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.053" />
+            app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
