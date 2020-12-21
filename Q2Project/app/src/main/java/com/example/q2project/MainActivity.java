@@ -7,16 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,9 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
     ListView listView;
     ArrayList<Heros> arrayList;
-    TextView name, description;
-    Button remove;
-    ImageView image;
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -128,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         List<Heros> list;
         Context context;
         int xml;
+        boolean showDesc = false;
 
         public CustomAdapter(@NonNull Context context, int resource, @NonNull List<Heros> objects) {
             super(context, resource, objects);
@@ -152,14 +146,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-
-
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 textView.setText(list.get(position).getName());
                 button.setText("REMOVE");
                 picture.setImageResource(list.get(position).getImage());
-
-
             }
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 textView.setText(list.get(position).getName());
@@ -171,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
                         description.setText(list.get(position).getDescription());
                     }
                 });
-
             }
             return adapterLayout;
         }
@@ -199,8 +188,5 @@ public class MainActivity extends AppCompatActivity {
         public String getName() {
             return name;
         }
-
     }
-
-
 }

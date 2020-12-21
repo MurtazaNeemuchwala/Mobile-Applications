@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="214dp"
+        android:layout_width="443dp"
+        android:layout_height="235dp"
         android:layout_weight="1">
 
         <ImageView
@@ -24,8 +24,8 @@
 
         <TextView
             android:id="@+id/id_adapter_TextView"
-            android:layout_width="187dp"
-            android:layout_height="151dp"
+            android:layout_width="226dp"
+            android:layout_height="145dp"
             android:layout_weight="1"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
