@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +16,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RatingBar;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,46 +82,36 @@ public class MainActivity extends AppCompatActivity {
         arrayList = new ArrayList<>();
 
         //Batman
-        arrayList.add(new Heros(
-                "Batman",
+        arrayList.add(new Heros("Batman",
                 "Hails from DC Universe. His whole story started when he witnessed his parents getting murdered in a robbery gone wrong. Ever since that moment in his life he pledged that he would make it his job to end crime in Gotham City. With the help of his team which includes, Alfred, Lucius Fox, and Oracle he plans to take down every Villain he can.",
-                (R.drawable.batman),
-                5));
+                R.drawable.batman));
 
         //Captain America
-        arrayList.add(new Heros(
-                "Captain America",
+        arrayList.add(new Heros("Captain America",
                 "Hails from Marvel Universe. Steve Rodgers was just a teenager drafted by the army to fight in WWII. The army started conducting special experiments to create biological Super-Humans so he volunteered and the experiment was a success. He was given super human abilities which made him unstoppable. He takes on Hydra to defeat them once and for all but in the process he is forced to sacrifice his life to save a city from a bombing. Captain does the ultimate deed and nose dives the plane with his body in it.",
-                (R.drawable.captain_america),
-                3.75));
+                (R.drawable.captain_america)));
 
         //Spidy
         arrayList.add(new Heros(
                 "Spiderman",
                 "Hails from Marvel Universe. Peter Parker was on a school field trip to a laboratory, Peter was wandering around and found a radioactive spider and got bit by it. He started to notice there were some changes happening to him, he had strong grip, great strength and high jumping abilities. He started to create web slingers and a suit to become his new persona, \"spiderman\".",
-                (R.drawable.spiderman),
-                4.5));
+                (R.drawable.spiderman)));
 
         //Ironman
         arrayList.add(new Heros(
                 "Ironman",
                 "Hails from Marvel Universe. Tony Stark, a tech wiz, a millionaire. He was once very arrogant a very egotistical person until he faced the hardest moments in his life. Ironman was held hostage by a terror group, he knew the only was he'd survive is if he escapes. In a cave Tony made a manned robot which he would use to fight his way out. He then realised his true mission in life, he must eradicate all terrorists in the world and make world peace.",
-                (R.drawable.ironman),
-                4));
+                (R.drawable.ironman)));
 
         //Hulk
-        arrayList.add(new Heros(
-                "Hulk",
+        arrayList.add(new Heros("Hulk",
                 "Hails from Marvel Universe. Bruce Banner a physicist, a chemist, and a biologist was conducting an experiment where he was hit by gamma rays and radiation. The radiation was so strong that the human biology in him was altered. Bruce had become a brute. He had become the \"Hulk\".",
-                (R.drawable.hulk),
-                3));
+                (R.drawable.hulk)));
 
         //Flash
-        arrayList.add(new Heros(
-                "Flash",
+        arrayList.add(new Heros("Flash",
                 "Hails from DC Universe. Barry Allen a detective was working a case and during an  investigation he was struck by lighting due to a particle accelerator. This put him in coma for several years. Once he finally woke up he had felt more energetic than ever, it was almost like time around him had slowed down. He then realised that the particle accelerator had caused a biological change in his body, his body and brain was actually moving faster. Upon more experimentation he had found out that he had super human speed.",
-                (R.drawable.flash),
-                2));
+                (R.drawable.flash)));
 
         if (savedInstanceState != null) {
             arrayList = (ArrayList<Heros>) savedInstanceState.getSerializable("KEY_LIST");
@@ -151,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
             // Button button = adapterLayout.findViewById(R.id.id_adapter_button);
             ImageButton remove = adapterLayout.findViewById(R.id.imageButton_remove);
             ImageView picture = adapterLayout.findViewById(R.id.id_adapter_imageView);
-            RatingBar ratingBar = adapterLayout.findViewById(R.id.ratingBar_land);
+            VideoView videoView= adapterLayout.findViewById(R.id.videoView_land);
 
             /*button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -193,24 +185,18 @@ public class MainActivity extends AppCompatActivity {
                 // button.setText("REMOVE");
                 remove.setImageResource(R.drawable.trash);
                 picture.setImageResource(list.get(position).getImage());
-                ratingBar.setRating((float) list.get(position).getStarRating());
-
-
-                ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                    @Override
-                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                        if(fromUser == true){
-                            ratingBar.setRating((float) list.get(position).getStarRating());
-                        }
-                    }
-                });
-
                 adapterLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         description.setText(list.get(position).getDescription());
                     }
                 });
+                MediaController contorls = new MediaController(this.context);
+                contorls.setAnchorView(videoView);
+                videoView.setMediaController(contorls);
+                String url = "https://www.youtube.com/watch?v=-CKyYV5doCI.mp4";
+                videoView.setVideoURI(Uri.parse(url));
+                videoView.start();
             }
             return adapterLayout;
         }
@@ -220,13 +206,12 @@ public class MainActivity extends AppCompatActivity {
         String name;
         String description;
         int image;
-        double starRating;
 
-        public Heros(String name, String description, int image, double starRating) {
+
+        public Heros(String name, String description, int image) {
             this.name = name;
             this.description = description;
             this.image = image;
-            this.starRating = starRating;
         }
 
         public int getImage() {
@@ -241,8 +226,5 @@ public class MainActivity extends AppCompatActivity {
             return name;
         }
 
-        public double getStarRating() {
-            return starRating;
-        }
     }
 }

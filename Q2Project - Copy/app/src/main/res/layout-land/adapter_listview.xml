@@ -3,14 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:focusable="false"
-    android:foregroundTint="#FFE600"
-    android:outlineProvider="background">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="317dp"
+        android:layout_height="354dp"
         android:layout_weight="1">
 
         <ImageButton
@@ -19,10 +16,10 @@
             android:layout_height="75dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.097"
+            app:layout_constraintHorizontal_bias="0.737"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.913"
+            app:layout_constraintVertical_bias="0.781"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
@@ -62,21 +59,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
-
-        <RatingBar
-            android:id="@+id/ratingBar_land"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            android:clickable="false"
-            android:numStars="5"
-            android:progressTint="#FFBF00"
+        <VideoView
+            android:id="@+id/videoView_land"
+            android:layout_width="317dp"
+            android:layout_height="161dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.765"
+            app:layout_constraintHorizontal_bias="0.038"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.892" />
+            app:layout_constraintVertical_bias="0.917" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
