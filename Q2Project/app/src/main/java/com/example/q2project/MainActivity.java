@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -136,10 +137,19 @@ public class MainActivity extends AppCompatActivity {
 
             TextView textView = adapterLayout.findViewById(R.id.id_adapter_TextView);
             TextView description = adapterLayout.findViewById(R.id.textView_description);
-            Button button = adapterLayout.findViewById(R.id.id_adapter_button);
+           // Button button = adapterLayout.findViewById(R.id.id_adapter_button);
+            ImageButton remove = adapterLayout.findViewById(R.id.imageButton_remove);
             ImageView picture = adapterLayout.findViewById(R.id.id_adapter_imageView);
 
-            button.setOnClickListener(new View.OnClickListener() {
+            /*button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    remove(list.get(position));
+                }
+            });
+
+             */
+            remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     remove(list.get(position));
@@ -148,12 +158,14 @@ public class MainActivity extends AppCompatActivity {
 
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 textView.setText(list.get(position).getName());
-                button.setText("REMOVE");
+                //button.setText("REMOVE");
+                remove.setImageResource(R.drawable.trash);
                 picture.setImageResource(list.get(position).getImage());
             }
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 textView.setText(list.get(position).getName());
-                button.setText("REMOVE");
+               // button.setText("REMOVE");
+                remove.setImageResource(R.drawable.trash);
                 picture.setImageResource(list.get(position).getImage());
                 adapterLayout.setOnClickListener(new View.OnClickListener() {
                     @Override

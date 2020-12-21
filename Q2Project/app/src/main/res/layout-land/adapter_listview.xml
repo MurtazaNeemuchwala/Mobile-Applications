@@ -10,6 +10,18 @@
         android:layout_height="259dp"
         android:layout_weight="1">
 
+        <ImageButton
+            android:id="@+id/imageButton_remove"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.339"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.923"
+            tools:srcCompat="@tools:sample/avatars" />
+
         <ImageView
             android:id="@+id/id_adapter_imageView"
             android:layout_width="170dp"
@@ -35,18 +47,6 @@
             app:layout_constraintHorizontal_bias="0.313"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/id_adapter_button"
-            android:layout_width="97dp"
-            android:layout_height="52dp"
-            android:layout_weight="1"
-            android:text="REMOVE"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/textView_description"
