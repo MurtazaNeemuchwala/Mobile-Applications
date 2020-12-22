@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:focusable="false"
     android:foregroundTint="#FFE600"
     android:outlineProvider="background">
@@ -11,7 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="317dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="#FFFFFF">
 
         <ImageButton
             android:id="@+id/imageButton_remove"
