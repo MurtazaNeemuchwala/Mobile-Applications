@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
             TextView textView = adapterLayout.findViewById(R.id.id_adapter_TextView);
             TextView description = adapterLayout.findViewById(R.id.textView_description);
+            TextView Rating_String = adapterLayout.findViewById(R.id.textView_rating);
             // Button button = adapterLayout.findViewById(R.id.id_adapter_button);
             ImageButton remove = adapterLayout.findViewById(R.id.imageButton_remove);
             ImageView picture = adapterLayout.findViewById(R.id.id_adapter_imageView);
@@ -205,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+                Rating_String.setText("Rating: "+list.get(position).getStarRating());
                 adapterLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
