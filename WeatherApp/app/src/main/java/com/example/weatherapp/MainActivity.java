@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
                 stream = connection.getInputStream();
                 bufferedReader = new BufferedReader(new InputStreamReader(stream));
                 String line = "";
-                while ((line=bufferedReader.readLine()) != null) {
-                    info +=line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    info += line;
                 }
                 jsonObject = new JSONObject(info);
 
             } catch (Exception e) {
-                Log.d("BRUH",e.toString());
+                Log.d("BRUH", e.toString());
             }
 
             Log.d("BRUH", info);
@@ -68,5 +68,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+
+        public double getFarenheit(double kelvin) {
+            double f = (((kelvin - 273) * 9 / 5) + 32);
+            return f;
+        }
+
+
     }
 }
