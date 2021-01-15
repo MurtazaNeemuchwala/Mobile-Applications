@@ -84,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
         pushCoordinates.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                APILatitude = String.valueOf(getLatitudeInput.getText());
-                APILongitude = String.valueOf(getLongitudeInput.getText());
                 new AsyncThread().execute();
             }
         });
@@ -221,6 +219,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public class AsyncThread extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if (getLatitudeInput.getText() == null && getLongitudeInput.getText() == null) {
+                APILatitude = APILatitude;
+                APILongitude = APILongitude;
+            }
+            APILatitude = String.valueOf(getLatitudeInput.getText());
+            APILongitude = String.valueOf(getLongitudeInput.getText());
+        }
 
         @Override
         protected Void doInBackground(String... voids) {
