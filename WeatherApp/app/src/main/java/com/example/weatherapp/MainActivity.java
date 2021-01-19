@@ -1,11 +1,12 @@
 package com.example.weatherapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,13 +24,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-
-import static java.lang.Double.valueOf;
 
 //https://api.openweathermap.org/data/2.5/find?lat=40.37977471083948&lon=-74.52311017230895&cnt=3&appid=b14595f196573fa7954bbc013e0d406e
 
@@ -44,10 +39,13 @@ public class MainActivity extends AppCompatActivity {
     String degreeSymbol = " \u2109";
     String APILatitude = "40.37977471083948";
     String APILongitude = "-74.52311017230895";
+    String tempAPILatitude = "40.37977471083948";
+    String tempAPILongitude = "-74.52311017230895";
     EditText getLatitudeInput, getLongitudeInput;
     Button city1, city2, city3, pushCoordinates;
     ImageView weatherPicture;
-    TextView cityNameTextView, timeTextView, temperatureTextView;
+    TextView cityNameTextView, dateTextView, temperatureTextView, timeTextView;
+    ConstraintLayout layout;
 
     //Important Globally accessible JSON OBJECTS
     JSONObject jsonObject, cityinfo0, cityinfo1, cityinfo2, cityWeatherInfo0, cityWeatherInfo1, cityWeatherInfo2;
@@ -77,9 +75,12 @@ public class MainActivity extends AppCompatActivity {
         weatherPicture = findViewById(R.id.weather_image);
         cityNameTextView = findViewById(R.id.cityName_textView);
         timeTextView = findViewById(R.id.time_textView);
+        dateTextView = findViewById(R.id.date_textView);
         temperatureTextView = findViewById(R.id.temperature_textView);
+        layout = findViewById(R.id.constraintlayout);
 
         new AsyncThread().execute();
+
 
         pushCoordinates.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 cityNameTextView.setText(cityName0);
                 temperatureTextView.setText(tempStatus0 + degreeSymbol);
+                dateTextView.setText(DATE(timeStamp0));
                 timeTextView.setText(Time(timeStamp0));
                 switch (weatherStatus0) {
                     case "clear sky":
@@ -133,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 cityNameTextView.setText(cityName1);
                 temperatureTextView.setText(tempStatus1 + degreeSymbol);
+                dateTextView.setText(DATE(timeStamp1));
+                timeTextView.setText(Time(timeStamp1));
                 switch (weatherStatus1) {
                     case "clear sky":
                         weatherPicture.setImageResource(R.drawable.day_clearsky);
@@ -172,6 +176,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 cityNameTextView.setText(cityName2);
                 temperatureTextView.setText(tempStatus2 + degreeSymbol);
+                dateTextView.setText(DATE(timeStamp2));
+                timeTextView.setText(Time(timeStamp2));
                 switch (weatherStatus2) {
                     case "clear sky":
                         weatherPicture.setImageResource(R.drawable.day_clearsky);
@@ -207,15 +213,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public int getFahrenheit(double kelvin) {
-        int f = (int) (((kelvin - 273) * 9 / 5) + 32);
-        return f;
+        return (int) (((kelvin - 273) * 9 / 5) + 32);
     }
 
     public String Time(long epoch) {
         Date a = new Date(epoch * 1000);
-        SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
-        String date = DATE_FORMAT.format(a);
-        return date;
+        /*SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("EEEE, MMMM d, yyyy");*/
+        SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("EEEE, MMMM d");
+        return DATE_FORMAT.format(a);
+    }
+    public String DATE(long epoch) {
+        Date a = new Date(epoch * 1000);
+        SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("hh:mm aa");
+        return DATE_FORMAT.format(a);
     }
 
     public class AsyncThread extends AsyncTask<String, Void, Void> {
@@ -223,12 +233,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            if (getLatitudeInput.getText() == null && getLongitudeInput.getText() == null) {
-                APILatitude = APILatitude;
-                APILongitude = APILongitude;
+            if (String.valueOf(getLatitudeInput.getText()).equals("")) {
+                APILatitude = tempAPILatitude;
+                APILongitude = tempAPILongitude;
+                Log.d(tag, "NOTHING IN SEARCH BARS");
+            } else {
+                APILatitude = String.valueOf(getLatitudeInput.getText());
+                APILongitude = String.valueOf(getLongitudeInput.getText());
+                Log.d(tag, "SOMETHING IS IN SEARCH BARS");
             }
-            APILatitude = String.valueOf(getLatitudeInput.getText());
-            APILongitude = String.valueOf(getLongitudeInput.getText());
         }
 
         @Override
@@ -323,10 +336,10 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(tag, timeStamp2 + "");
 
                     }
-
                     city1.setText(cityName0);
                     city2.setText(cityName1);
                     city3.setText(cityName2);
+                    city1.callOnClick();
 
                     a++;
                 }
