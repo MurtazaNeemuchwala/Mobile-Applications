@@ -1,5 +1,6 @@
 package com.example.weatherapp;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -44,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
     EditText getLatitudeInput, getLongitudeInput;
     Button city1, city2, city3, pushCoordinates;
     ImageView weatherPicture;
-    TextView cityNameTextView, dateTextView, temperatureTextView, timeTextView;
+    TextView cityNameTextView, dateTextView, temperatureTextView, timeTextView, weatherDescriptionTextView;
     ConstraintLayout layout;
+
 
     //Important Globally accessible JSON OBJECTS
     JSONObject jsonObject, cityinfo0, cityinfo1, cityinfo2, cityWeatherInfo0, cityWeatherInfo1, cityWeatherInfo2;
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         dateTextView = findViewById(R.id.date_textView);
         temperatureTextView = findViewById(R.id.temperature_textView);
         layout = findViewById(R.id.constraintlayout);
+        weatherDescriptionTextView = findViewById(R.id.weatherDescription_textView);
 
         new AsyncThread().execute();
 
@@ -97,34 +100,26 @@ public class MainActivity extends AppCompatActivity {
                 temperatureTextView.setText(tempStatus0 + degreeSymbol);
                 dateTextView.setText(DATE(timeStamp0));
                 timeTextView.setText(Time(timeStamp0));
-                switch (weatherStatus0) {
-                    case "clear sky":
-                        weatherPicture.setImageResource(R.drawable.day_clearsky);
-                        break;
-                    case "few clouds":
-                        weatherPicture.setImageResource(R.drawable.day_fewclouds);
-                        break;
-                    case "scattered clouds":
-                        weatherPicture.setImageResource(R.drawable.day_scatteredclouds);
-                        break;
-                    case "broken clouds":
-                        weatherPicture.setImageResource(R.drawable.day_brokenclouds);
-                        break;
-                    case "shower rain":
-                        weatherPicture.setImageResource(R.drawable.day_showerrain);
-                        break;
-                    case "rain":
-                        weatherPicture.setImageResource(R.drawable.day_rain);
-                        break;
-                    case "thunderstorm":
-                        weatherPicture.setImageResource(R.drawable.day_thunderstorm);
-                        break;
-                    case "snow":
-                        weatherPicture.setImageResource(R.drawable.day_snow);
-                        break;
-                    case "mist":
-                        weatherPicture.setImageResource(R.drawable.day_mist);
-                        break;
+                weatherDescriptionTextView.setText(weatherStatus0);
+
+                if (weatherStatus0.equalsIgnoreCase("clear sky")) {
+                    weatherPicture.setImageResource(R.drawable.day_clearsky);
+                } else if (weatherStatus0.equalsIgnoreCase("few clouds")) {
+                    weatherPicture.setImageResource(R.drawable.day_fewclouds);
+                } else if (weatherStatus0.equalsIgnoreCase("scattered clouds")) {
+                    weatherPicture.setImageResource(R.drawable.day_scatteredclouds);
+                } else if (weatherStatus0.equalsIgnoreCase("broken clouds") || weatherStatus0.equalsIgnoreCase("overcast clouds")) {
+                    weatherPicture.setImageResource(R.drawable.day_brokenclouds);
+                } else if (weatherStatus0.equalsIgnoreCase("light intensity drizzle") || weatherStatus0.equalsIgnoreCase("drizzle") || weatherStatus0.equalsIgnoreCase("heavy intensity drizzle") || weatherStatus0.equalsIgnoreCase("light intensity drizzle rain") || weatherStatus0.equalsIgnoreCase("drizzle rain") || weatherStatus0.equalsIgnoreCase("heavy intensity drizzle rain") || weatherStatus0.equalsIgnoreCase("shower rain and drizzle") || weatherStatus0.equalsIgnoreCase("heavy shower rain and drizzle") || weatherStatus0.equalsIgnoreCase("shower drizzle") || weatherStatus0.equalsIgnoreCase("light intensity shower rain") || weatherStatus0.equalsIgnoreCase("shower rain") || weatherStatus0.equalsIgnoreCase("heavy intensity shower rain") || weatherStatus0.equalsIgnoreCase("ragged shower rain")) {
+                    weatherPicture.setImageResource(R.drawable.day_showerrain);
+                } else if (weatherStatus0.equalsIgnoreCase("rain") || weatherStatus0.equalsIgnoreCase("light rain") || weatherStatus0.equalsIgnoreCase("moderate rain") || weatherStatus0.equalsIgnoreCase("heavy intensity rain") || weatherStatus0.equalsIgnoreCase("very heavy rain") || weatherStatus0.equalsIgnoreCase("extreme rain")) {
+                    weatherPicture.setImageResource(R.drawable.day_rain);
+                } else if (weatherStatus0.equalsIgnoreCase("thunderstorm") || weatherStatus0.equalsIgnoreCase("thunderstorm with light rain") || weatherStatus0.equalsIgnoreCase("thunderstorm with rain") || weatherStatus0.equalsIgnoreCase("thunderstorm with heavy rain") || weatherStatus0.equalsIgnoreCase("light thunderstorm") || weatherStatus0.equalsIgnoreCase("thunderstorm with heavy drizzle") || weatherStatus0.equalsIgnoreCase("heavy thunderstorm") || weatherStatus0.equalsIgnoreCase("ragged thunderstorm") || weatherStatus0.equalsIgnoreCase("thunderstorm with light drizzle") || weatherStatus0.equalsIgnoreCase("thunderstorm with drizzle")) {
+                    weatherPicture.setImageResource(R.drawable.day_thunderstorm);
+                } else if (weatherStatus0.equalsIgnoreCase("Snow") || weatherStatus0.equalsIgnoreCase("light snow") || weatherStatus0.equalsIgnoreCase("Heavy snow") || weatherStatus0.equalsIgnoreCase("Sleet") || weatherStatus0.equalsIgnoreCase("Light shower sleet") || weatherStatus0.equalsIgnoreCase("Shower sleet") || weatherStatus0.equalsIgnoreCase("Light rain and snow") || weatherStatus0.equalsIgnoreCase("Rain and snow") || weatherStatus0.equalsIgnoreCase("Light shower snow") || weatherStatus0.equalsIgnoreCase("Shower snow") || weatherStatus0.equalsIgnoreCase("Heavy shower snow") || weatherStatus0.equalsIgnoreCase("freezing rain")) {
+                    weatherPicture.setImageResource(R.drawable.day_snow);
+                } else if (weatherStatus0.equalsIgnoreCase("mist") || weatherStatus0.equalsIgnoreCase("Smoke") || weatherStatus0.equalsIgnoreCase("Haze") || weatherStatus0.equalsIgnoreCase("sand/ dust whirls") || weatherStatus0.equalsIgnoreCase("fog") || weatherStatus0.equalsIgnoreCase("sand") || weatherStatus0.equalsIgnoreCase("dust") || weatherStatus0.equalsIgnoreCase("volcanic ash") || weatherStatus0.equalsIgnoreCase("squalls") || weatherStatus0.equalsIgnoreCase("tornado")) {
+                    weatherPicture.setImageResource(R.drawable.day_mist);
                 }
             }
         });
@@ -137,34 +132,24 @@ public class MainActivity extends AppCompatActivity {
                 temperatureTextView.setText(tempStatus1 + degreeSymbol);
                 dateTextView.setText(DATE(timeStamp1));
                 timeTextView.setText(Time(timeStamp1));
-                switch (weatherStatus1) {
-                    case "clear sky":
-                        weatherPicture.setImageResource(R.drawable.day_clearsky);
-                        break;
-                    case "few clouds":
-                        weatherPicture.setImageResource(R.drawable.day_fewclouds);
-                        break;
-                    case "scattered clouds":
-                        weatherPicture.setImageResource(R.drawable.day_scatteredclouds);
-                        break;
-                    case "broken clouds":
-                        weatherPicture.setImageResource(R.drawable.day_brokenclouds);
-                        break;
-                    case "shower rain":
-                        weatherPicture.setImageResource(R.drawable.day_showerrain);
-                        break;
-                    case "rain":
-                        weatherPicture.setImageResource(R.drawable.day_rain);
-                        break;
-                    case "thunderstorm":
-                        weatherPicture.setImageResource(R.drawable.day_thunderstorm);
-                        break;
-                    case "snow":
-                        weatherPicture.setImageResource(R.drawable.day_snow);
-                        break;
-                    case "mist":
-                        weatherPicture.setImageResource(R.drawable.day_mist);
-                        break;
+                if (weatherStatus1.equalsIgnoreCase("clear sky")) {
+                    weatherPicture.setImageResource(R.drawable.day_clearsky);
+                } else if (weatherStatus1.equalsIgnoreCase("few clouds")) {
+                    weatherPicture.setImageResource(R.drawable.day_fewclouds);
+                } else if (weatherStatus1.equalsIgnoreCase("scattered clouds")) {
+                    weatherPicture.setImageResource(R.drawable.day_scatteredclouds);
+                } else if (weatherStatus1.equalsIgnoreCase("broken clouds") || weatherStatus1.equalsIgnoreCase("overcast clouds")) {
+                    weatherPicture.setImageResource(R.drawable.day_brokenclouds);
+                } else if (weatherStatus1.equalsIgnoreCase("light intensity drizzle") || weatherStatus1.equalsIgnoreCase("drizzle") || weatherStatus1.equalsIgnoreCase("heavy intensity drizzle") || weatherStatus1.equalsIgnoreCase("light intensity drizzle rain") || weatherStatus1.equalsIgnoreCase("drizzle rain") || weatherStatus1.equalsIgnoreCase("heavy intensity drizzle rain") || weatherStatus1.equalsIgnoreCase("shower rain and drizzle") || weatherStatus1.equalsIgnoreCase("heavy shower rain and drizzle") || weatherStatus1.equalsIgnoreCase("shower drizzle") || weatherStatus1.equalsIgnoreCase("light intensity shower rain") || weatherStatus1.equalsIgnoreCase("shower rain") || weatherStatus1.equalsIgnoreCase("heavy intensity shower rain") || weatherStatus1.equalsIgnoreCase("ragged shower rain")) {
+                    weatherPicture.setImageResource(R.drawable.day_showerrain);
+                } else if (weatherStatus1.equalsIgnoreCase("rain") || weatherStatus1.equalsIgnoreCase("light rain") || weatherStatus1.equalsIgnoreCase("moderate rain") || weatherStatus1.equalsIgnoreCase("heavy intensity rain") || weatherStatus1.equalsIgnoreCase("very heavy rain") || weatherStatus1.equalsIgnoreCase("extreme rain")) {
+                    weatherPicture.setImageResource(R.drawable.day_rain);
+                } else if (weatherStatus1.equalsIgnoreCase("thunderstorm") || weatherStatus1.equalsIgnoreCase("thunderstorm with light rain") || weatherStatus1.equalsIgnoreCase("thunderstorm with rain") || weatherStatus1.equalsIgnoreCase("thunderstorm with heavy rain") || weatherStatus1.equalsIgnoreCase("light thunderstorm") || weatherStatus1.equalsIgnoreCase("thunderstorm with heavy drizzle") || weatherStatus1.equalsIgnoreCase("heavy thunderstorm") || weatherStatus1.equalsIgnoreCase("ragged thunderstorm") || weatherStatus1.equalsIgnoreCase("thunderstorm with light drizzle") || weatherStatus1.equalsIgnoreCase("thunderstorm with drizzle")) {
+                    weatherPicture.setImageResource(R.drawable.day_thunderstorm);
+                } else if (weatherStatus1.equalsIgnoreCase("Snow") || weatherStatus1.equalsIgnoreCase("light snow") || weatherStatus1.equalsIgnoreCase("Heavy snow") || weatherStatus1.equalsIgnoreCase("Sleet") || weatherStatus1.equalsIgnoreCase("Light shower sleet") || weatherStatus1.equalsIgnoreCase("Shower sleet") || weatherStatus1.equalsIgnoreCase("Light rain and snow") || weatherStatus1.equalsIgnoreCase("Rain and snow") || weatherStatus1.equalsIgnoreCase("Light shower snow") || weatherStatus1.equalsIgnoreCase("Shower snow") || weatherStatus1.equalsIgnoreCase("Heavy shower snow") || weatherStatus1.equalsIgnoreCase("freezing rain")) {
+                    weatherPicture.setImageResource(R.drawable.day_snow);
+                } else if (weatherStatus1.equalsIgnoreCase("mist") || weatherStatus1.equalsIgnoreCase("Smoke") || weatherStatus1.equalsIgnoreCase("Haze") || weatherStatus1.equalsIgnoreCase("sand/ dust whirls") || weatherStatus1.equalsIgnoreCase("fog") || weatherStatus1.equalsIgnoreCase("sand") || weatherStatus1.equalsIgnoreCase("dust") || weatherStatus1.equalsIgnoreCase("volcanic ash") || weatherStatus1.equalsIgnoreCase("squalls") || weatherStatus1.equalsIgnoreCase("tornado")) {
+                    weatherPicture.setImageResource(R.drawable.day_mist);
                 }
 
             }
@@ -178,34 +163,24 @@ public class MainActivity extends AppCompatActivity {
                 temperatureTextView.setText(tempStatus2 + degreeSymbol);
                 dateTextView.setText(DATE(timeStamp2));
                 timeTextView.setText(Time(timeStamp2));
-                switch (weatherStatus2) {
-                    case "clear sky":
-                        weatherPicture.setImageResource(R.drawable.day_clearsky);
-                        break;
-                    case "few clouds":
-                        weatherPicture.setImageResource(R.drawable.day_fewclouds);
-                        break;
-                    case "scattered clouds":
-                        weatherPicture.setImageResource(R.drawable.day_scatteredclouds);
-                        break;
-                    case "broken clouds":
-                        weatherPicture.setImageResource(R.drawable.day_brokenclouds);
-                        break;
-                    case "shower rain":
-                        weatherPicture.setImageResource(R.drawable.day_showerrain);
-                        break;
-                    case "rain":
-                        weatherPicture.setImageResource(R.drawable.day_rain);
-                        break;
-                    case "thunderstorm":
-                        weatherPicture.setImageResource(R.drawable.day_thunderstorm);
-                        break;
-                    case "snow":
-                        weatherPicture.setImageResource(R.drawable.day_snow);
-                        break;
-                    case "mist":
-                        weatherPicture.setImageResource(R.drawable.day_mist);
-                        break;
+                if (weatherStatus2.equalsIgnoreCase("clear sky")) {
+                    weatherPicture.setImageResource(R.drawable.day_clearsky);
+                } else if (weatherStatus2.equalsIgnoreCase("few clouds")) {
+                    weatherPicture.setImageResource(R.drawable.day_fewclouds);
+                } else if (weatherStatus2.equalsIgnoreCase("scattered clouds")) {
+                    weatherPicture.setImageResource(R.drawable.day_scatteredclouds);
+                } else if (weatherStatus2.equalsIgnoreCase("broken clouds") || weatherStatus2.equalsIgnoreCase("overcast clouds")) {
+                    weatherPicture.setImageResource(R.drawable.day_brokenclouds);
+                } else if (weatherStatus2.equalsIgnoreCase("light intensity drizzle") || weatherStatus2.equalsIgnoreCase("drizzle") || weatherStatus2.equalsIgnoreCase("heavy intensity drizzle") || weatherStatus2.equalsIgnoreCase("light intensity drizzle rain") || weatherStatus2.equalsIgnoreCase("drizzle rain") || weatherStatus2.equalsIgnoreCase("heavy intensity drizzle rain") || weatherStatus2.equalsIgnoreCase("shower rain and drizzle") || weatherStatus2.equalsIgnoreCase("heavy shower rain and drizzle") || weatherStatus2.equalsIgnoreCase("shower drizzle") || weatherStatus2.equalsIgnoreCase("light intensity shower rain") || weatherStatus2.equalsIgnoreCase("shower rain") || weatherStatus2.equalsIgnoreCase("heavy intensity shower rain") || weatherStatus2.equalsIgnoreCase("ragged shower rain")) {
+                    weatherPicture.setImageResource(R.drawable.day_showerrain);
+                } else if (weatherStatus2.equalsIgnoreCase("rain") || weatherStatus2.equalsIgnoreCase("light rain") || weatherStatus2.equalsIgnoreCase("moderate rain") || weatherStatus2.equalsIgnoreCase("heavy intensity rain") || weatherStatus2.equalsIgnoreCase("very heavy rain") || weatherStatus2.equalsIgnoreCase("extreme rain")) {
+                    weatherPicture.setImageResource(R.drawable.day_rain);
+                } else if (weatherStatus2.equalsIgnoreCase("thunderstorm") || weatherStatus2.equalsIgnoreCase("thunderstorm with light rain") || weatherStatus2.equalsIgnoreCase("thunderstorm with rain") || weatherStatus2.equalsIgnoreCase("thunderstorm with heavy rain") || weatherStatus2.equalsIgnoreCase("light thunderstorm") || weatherStatus2.equalsIgnoreCase("thunderstorm with heavy drizzle") || weatherStatus2.equalsIgnoreCase("heavy thunderstorm") || weatherStatus2.equalsIgnoreCase("ragged thunderstorm") || weatherStatus2.equalsIgnoreCase("thunderstorm with light drizzle") || weatherStatus2.equalsIgnoreCase("thunderstorm with drizzle")) {
+                    weatherPicture.setImageResource(R.drawable.day_thunderstorm);
+                } else if (weatherStatus2.equalsIgnoreCase("Snow") || weatherStatus2.equalsIgnoreCase("light snow") || weatherStatus2.equalsIgnoreCase("Heavy snow") || weatherStatus2.equalsIgnoreCase("Sleet") || weatherStatus2.equalsIgnoreCase("Light shower sleet") || weatherStatus2.equalsIgnoreCase("Shower sleet") || weatherStatus2.equalsIgnoreCase("Light rain and snow") || weatherStatus2.equalsIgnoreCase("Rain and snow") || weatherStatus2.equalsIgnoreCase("Light shower snow") || weatherStatus2.equalsIgnoreCase("Shower snow") || weatherStatus2.equalsIgnoreCase("Heavy shower snow") || weatherStatus2.equalsIgnoreCase("freezing rain")) {
+                    weatherPicture.setImageResource(R.drawable.day_snow);
+                } else if (weatherStatus2.equalsIgnoreCase("mist") || weatherStatus2.equalsIgnoreCase("Smoke") || weatherStatus2.equalsIgnoreCase("Haze") || weatherStatus2.equalsIgnoreCase("sand/ dust whirls") || weatherStatus2.equalsIgnoreCase("fog") || weatherStatus2.equalsIgnoreCase("sand") || weatherStatus2.equalsIgnoreCase("dust") || weatherStatus2.equalsIgnoreCase("volcanic ash") || weatherStatus2.equalsIgnoreCase("squalls") || weatherStatus2.equalsIgnoreCase("tornado")) {
+                    weatherPicture.setImageResource(R.drawable.day_mist);
                 }
             }
         });
@@ -222,11 +197,13 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("EEEE, MMMM d");
         return DATE_FORMAT.format(a);
     }
+
     public String DATE(long epoch) {
         Date a = new Date(epoch * 1000);
         SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("hh:mm aa");
         return DATE_FORMAT.format(a);
     }
+
 
     public class AsyncThread extends AsyncTask<String, Void, Void> {
 
@@ -242,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
                 APILongitude = String.valueOf(getLongitudeInput.getText());
                 Log.d(tag, "SOMETHING IS IN SEARCH BARS");
             }
+
         }
 
         @Override
@@ -261,11 +239,12 @@ public class MainActivity extends AppCompatActivity {
                 jsonObject = new JSONObject(info);
 
             } catch (Exception e) {
-                Log.d(tag, e.toString());
+                Log.d("BRUH!", e.toString());
             }
 
             Log.d(tag, info);
             return null;
+
         }
 
         @Override
