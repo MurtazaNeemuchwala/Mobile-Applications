@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 new AsyncThread().execute();
             }
         });
+
 
         city1.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
@@ -204,7 +206,6 @@ public class MainActivity extends AppCompatActivity {
         return DATE_FORMAT.format(a);
     }
 
-
     public class AsyncThread extends AsyncTask<String, Void, Void> {
 
         @Override
@@ -245,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("TAG", e.toString());
             }
 
-           // Log.d(tag, info);
+            // Log.d(tag, info);
             Log.d("TAG", info);
             return null;
 
