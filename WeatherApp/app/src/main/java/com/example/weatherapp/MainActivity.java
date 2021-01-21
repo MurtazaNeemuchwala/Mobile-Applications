@@ -231,18 +231,22 @@ public class MainActivity extends AppCompatActivity {
                 stream = connection.getInputStream();
                 bufferedReader = new BufferedReader(new InputStreamReader(stream));
                 String line = "";
+                info = "";
                 if ((line = bufferedReader.readLine()) != null) {
                     do {
                         info += line;
+                        Log.d("TAG", info);
                     } while ((line = bufferedReader.readLine()) != null);
                 }
                 jsonObject = new JSONObject(info);
 
             } catch (Exception e) {
-                Log.d("BRUH!", e.toString());
+                //Log.d("BRUH!", e.toString());
+                Log.d("TAG", e.toString());
             }
 
-            Log.d(tag, info);
+           // Log.d(tag, info);
+            Log.d("TAG", info);
             return null;
 
         }
