@@ -27,6 +27,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 //https://api.openweathermap.org/data/2.5/find?lat=40.37977471083948&lon=-74.52311017230895&cnt=3&appid=b14595f196573fa7954bbc013e0d406e
 
@@ -203,7 +204,9 @@ public class MainActivity extends AppCompatActivity {
     public String DATE(long epoch) {
         Date a = new Date(epoch * 1000);
         SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("hh:mm aa");
-        return DATE_FORMAT.format(a);
+        DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+        String date = DATE_FORMAT.format(a);
+        return date;
     }
 
     public class AsyncThread extends AsyncTask<String, Void, Void> {
