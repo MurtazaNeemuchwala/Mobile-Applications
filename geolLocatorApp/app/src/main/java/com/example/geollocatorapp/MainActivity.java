@@ -27,10 +27,13 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
-    TextView location_textView, distance_textView;
-    Button getDistance_Button;
+    TextView location_textView, distance_textView, timeTravel_textView;
+
     LocationManager locationManager;
     Location globalLocation;
     JSONObject jsonObject;
@@ -43,28 +46,49 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     ArrayList<Location> coord = new ArrayList<Location>();
     String display_name;
 
+    Long currentTime;
+    Long endTime;
+    float totalTime;
+
+    double totalDistance = 0;
+
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         location_textView = findViewById(R.id.location_textVIew);
-        distance_textView = findViewById(R.id.distance_TextView);
-        getDistance_Button = findViewById(R.id.getDistance_button);
+        distance_textView = findViewById(R.id.distance_TextView2);
+        timeTravel_textView = findViewById(R.id.timeTravel_TextView);
+        currentTime = Calendar.getInstance().getTimeInMillis();
+
+
+        /*timeTravel_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                endTime = System.currentTimeMillis();
+                float minutes = TimeUnit.MILLISECONDS.toMinutes((long) (endTime - startTime));
+                timeTravel_textView.setText("Time traveled: " + Math.round(minutes) + " minutes");
+            }
+        });
 
         getDistance_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 try {
                     if (coord.size() > 0) {
-                        double distance =  (coord.get(coord.size()-2).distanceTo(coord.get(coord.size()-1))*0.00062137119);
-                        distance_textView.setText("Distance traveled from last location: "+distance);
+                        double distance = (coord.get(coord.size() - 2).distanceTo(coord.get(coord.size() - 1)) * 0.00062137119);
+                        totalDistance += distance;
+
+                        distance_textView.setText("Distance traveled: " + Math.round(totalDistance) + " miles");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-        });
+        });*/
 
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{
@@ -122,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         // permissions this app might request.
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onLocationChanged(@NonNull Location location) {
         try {
@@ -135,6 +160,23 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         } catch (Exception e) {
             e.printStackTrace();
             Log.d(tag, e.toString());
+        }
+
+        endTime = Calendar.getInstance().getTimeInMillis();
+        float seconds = TimeUnit.MILLISECONDS.toSeconds((long) (endTime - currentTime));
+        Log.d(tag, String.valueOf(seconds));
+        totalTime += seconds;
+        timeTravel_textView.setText("Time traveled: " + totalTime + " Seconds");
+
+        try {
+            if (coord.size() > 0) {
+                double distance = (coord.get(coord.size() - 2).distanceTo(coord.get(coord.size() - 1)) * 0.00062137119);
+                totalDistance += distance;
+
+                distance_textView.setText("Distance traveled: " + Math.round(totalDistance* 100.0) / 100.0 + " miles");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
