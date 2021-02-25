@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     TextView cookieCountDisplay;
 
     Integer cookieCounter= 0;
-
+//hello
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
