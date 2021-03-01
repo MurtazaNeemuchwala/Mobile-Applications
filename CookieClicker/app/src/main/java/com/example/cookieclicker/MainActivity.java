@@ -15,14 +15,16 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class MainActivity extends AppCompatActivity {
 
     ImageView cookieImage;
     ConstraintLayout layout;
     TextView cookieCountDisplay;
-
+    AtomicInteger score = new AtomicInteger();
     Integer cookieCounter= 0;
-//hello
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
