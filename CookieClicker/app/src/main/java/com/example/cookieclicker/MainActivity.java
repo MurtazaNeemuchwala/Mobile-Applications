@@ -28,13 +28,15 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView cookieImage;
     ConstraintLayout layout;
-    TextView cookieCountDisplay;
-    int cookieCounter = 0;
+    TextView cookieCountDisplay, text_grandma;
+    AtomicInteger cookieCounter = new AtomicInteger();
     String tag = "BRUH";
+    String grandmaBaseText = "Grandmas: ";
     Button button_Grandma;
+    int grandmaCount = 0;
 
     public static float randomNum() {
-        float rand = (float) (Math.random() * (.9 - .1) + .1);
+        float rand = (float) (Math.random() * (.9 - .1)/* + .1*/);
         Log.d("BRUH", String.valueOf(rand));
         return rand;
     }
@@ -43,15 +45,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         cookieImage = findViewById(R.id.imageView_Cookie);
         layout = findViewById(R.id.id_layout);
-        cookieCountDisplay = findViewById(R.id.id_textView_cookieCounter);
-        button_Grandma = findViewById(R.id.button_Grandma);
-        cookieCountDisplay.setText("Cookies: " + cookieCounter);
 
+        cookieCountDisplay = findViewById(R.id.id_textView_cookieCounter);
+        cookieCountDisplay.setText("Cookies: " + cookieCounter.get());
+
+        button_Grandma = findViewById(R.id.button_Grandma);
         button_Grandma.setVisibility(View.INVISIBLE);
         button_Grandma.setClickable(false);
+
+        text_grandma = findViewById(R.id.textView_Grandmas);
+        text_grandma.setVisibility(View.INVISIBLE);
 
         ScaleAnimation scaleAnimation = new ScaleAnimation(.50f, 1.0f, .50f, 1.0f, Animation.RELATIVE_TO_SELF, .5f, Animation.RELATIVE_TO_SELF, .5f);
         scaleAnimation.setDuration(250);
@@ -59,14 +64,21 @@ public class MainActivity extends AppCompatActivity {
         button_Grandma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cookieCounter -= 100;
+                grandmaCount++;
+                String temp = grandmaBaseText + grandmaCount;
+                text_grandma.setText(temp);
+                cookieCounter.getAndSet(cookieCounter.get() - 100);
                 cookieCountDisplay.setText("Cookies: " + cookieCounter);
-                if (cookieCounter >= 100) {
+                if (cookieCounter.get() >= 100) {
                     button_Grandma.setVisibility(View.VISIBLE);
                     button_Grandma.setClickable(true);
                 } else {
                     button_Grandma.setVisibility(View.INVISIBLE);
                     button_Grandma.setClickable(false);
+                }
+
+                if(grandmaCount>0){
+                    text_grandma.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -75,10 +87,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cookieImage.startAnimation(scaleAnimation);
-                cookieCounter++;
+                cookieCounter.getAndIncrement();
                 cookieCountDisplay.setText("Cookies: " + cookieCounter);
 
-                if (cookieCounter >= 100) {
+                if (cookieCounter.get() >= 100) {
                     button_Grandma.setVisibility(View.VISIBLE);
                     button_Grandma.setClickable(true);
                 } else {
