@@ -10,13 +10,12 @@
 
     <ImageView
         android:id="@+id/imageView_Cookie"
-        android:layout_width="150dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="290dp"
+        android:layout_width="143dp"
+        android:layout_height="161dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_Grandma"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/cookie_picture" />
 
     <TextView
@@ -37,12 +36,12 @@
         android:id="@+id/button_Grandma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="103dp"
-        android:layout_marginBottom="132dp"
-        android:text="Grandma \n 100 Cookies"
-        app:layout_constraintBottom_toTopOf="@+id/imageView_Cookie"
+        android:text="Buy 1 Grandma \n 100 Cookies"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.016"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.682" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
