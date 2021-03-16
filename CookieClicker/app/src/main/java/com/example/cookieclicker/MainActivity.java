@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 layout.removeView(textInCode);
+                Log.d("murtaza", String.valueOf(layout.getChildCount()));
             }
 
             @Override
