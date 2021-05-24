@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -27,6 +29,7 @@ import java.util.Collections;
 public class MainActivity extends AppCompatActivity {
 
     Button UploadPDFButton;
+    DriveServiceHelper driveServiceHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +55,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode) {
-            case 400:
-                if (resultCode == RESULT_OK) {
-                    handleSignInIntent(data);
-                }
-
-                break;
+        if (requestCode == 400) {
+            if (resultCode == RESULT_OK) handleSignInIntent(data);
         }
     }
 
@@ -68,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(GoogleSignInAccount googleSignInAccount) {
 
-                        GoogleAccountCredential credential = new GoogleAccountCredential.
+                        GoogleAccountCredential credential = GoogleAccountCredential.
                                 usingOAuth2(MainActivity.this, Collections.singleton(DriveScopes.DRIVE_FILE));
 
 
@@ -80,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
                                 credential)
                                 .setApplicationName("My Drive Upload")
                                 .build();
+
+                        driveServiceHelper = new DriveServiceHelper(googleDriveService);
+
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -88,9 +90,28 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+
     }
 
     public void uploadPdfFile(View v) {
 
+        Toast progressToast = Toast.makeText(MainActivity.this, "Uploading To Google Drive... /n Please Wait", Toast.LENGTH_LONG);
+        progressToast.show();
+
+        String filePath = "/storage/emulated/0/mypdf.pdf";
+        driveServiceHelper.createFilePDF(filePath).addOnSuccessListener(new OnSuccessListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                Toast successToast = Toast.makeText(MainActivity.this, "File Uploaded Successfully", Toast.LENGTH_SHORT);
+                successToast.show();
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast failToast = Toast.makeText(MainActivity.this, "Upload Failed", Toast.LENGTH_SHORT);
+                        failToast.show();
+                    }
+                });
     }
 }
