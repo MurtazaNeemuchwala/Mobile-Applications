@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "826638666678",
+    "project_id": "gramscanbeta",
+    "storage_bucket": "gramscanbeta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826638666678:android:f4385dbef9c4eafbcb4f17",
+        "android_client_info": {
+          "package_name": "com.MurtazaNeemuchwala.gramscanbeta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826638666678-lqht10otcv9n50ep2031oc9183cq4iq0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.MurtazaNeemuchwala.gramscanbeta",
+            "certificate_hash": "425c4196481349af0ff53c5fe54fd5334b11381a"
+          }
+        },
+        {
+          "client_id": "826638666678-bmrnldmaje1407d9jmtfksgip4emok3p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3EtRhWcmByR6AcQBmD-dlzZBofppPQZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "826638666678-bmrnldmaje1407d9jmtfksgip4emok3p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
