@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.MurtazaNeemuchwala.gramscanbeta"
+        applicationId "com.murtazaneemuchwala.gramscanbeta20"
         minSdkVersion 27
         targetSdkVersion 30
         versionCode 1
@@ -30,15 +30,16 @@ android {
 
 dependencies {
 
-    implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
-
+    implementation 'com.google.firebase:firebase-bom:28.0.1'
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
+    implementation 'com.google.firebase:firebase-core:15.0.0'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-}
 
+}
 apply plugin: 'com.google.gms.google-services'
